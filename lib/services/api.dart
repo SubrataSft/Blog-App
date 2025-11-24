@@ -110,7 +110,7 @@ class AuthApiService {
       body: jsonEncode({
         "post_id": postId,
         "content": content,
-        "parent_id": 1,
+        "parent_id": 0,
       }),
     );
 

@@ -81,10 +81,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 30),
-                      const CircleAvatar(
-                        radius: 70,
-                        backgroundImage: AssetImage(
-                          "assets/images/Subrata.png",
+                      Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(60),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/Normal_Image.png"),
+                            fit: BoxFit.cover,
+                            onError: (_, __) => print("Image not found!"),
+
+                          ),
                         ),
                       ),
                       SizedBox(height: 20),

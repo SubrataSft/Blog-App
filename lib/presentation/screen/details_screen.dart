@@ -74,7 +74,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     if (success) {
       setState(() {
         likedByUser = !likedByUser;
-        likesCount += likedByUser ? 1 : -1;
+        likesCount += likedByUser ? 1 : -2;
       });
     }
   }
@@ -88,9 +88,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // APPBAR
-  // -----------------------------
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.black,
@@ -105,9 +102,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // BODY
-  // -----------------------------
   Widget buildBody() {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 20),
@@ -132,9 +126,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // IMAGE
-  // -----------------------------
   Widget buildImage() {
     return SizedBox(
       height: 250,
@@ -146,9 +137,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // TITLE
-  // -----------------------------
   Widget buildTitle() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -163,9 +151,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // CONTENT
-  // -----------------------------
   Widget buildContent() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -180,9 +165,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // LIKE + COMMENT ROW
-  // -----------------------------
+
   Widget buildLikesAndCommentsRow() {
     return Row(
       children: [
@@ -205,11 +188,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
           ],
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         Stack(
           alignment: Alignment.center,
           children: [
-            const Icon(Icons.comment, color: Colors.white, size: 28),
+            IconButton(onPressed: (){},icon:Icon(Icons.comment, color: Colors.white, size: 28),),
             Positioned(
               right: 4,
               top: 8,
@@ -221,7 +204,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // Badge UI
   Widget buildCountBadge(int number) {
     return Container(
       padding: const EdgeInsets.all(4),
@@ -236,9 +218,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // COMMENTS HEADER
-  // -----------------------------
   Widget buildCommentsHeader() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -253,9 +232,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // -----------------------------
-  // COMMENTS LIST
-  // -----------------------------
+
   Widget buildCommentsSection() {
     if (loadingComments) {
       return const Center(
@@ -267,7 +244,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Text(
-          "No comments yet",
+          "No comments ",
           style: TextStyle(color: Colors.white70),
         ),
       );
@@ -276,21 +253,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return ListView.builder(
       itemCount: comments.length,
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
         final c = comments[index];
         return ListTile(
-          leading: const CircleAvatar(child: Icon(Icons.person)),
-          title: Text(c.user, style: const TextStyle(color: Colors.white)),
-          subtitle: Text(c.comment, style: const TextStyle(color: Colors.white70)),
+          leading:  CircleAvatar(child: Icon(Icons.person)),
+          title: Text(c.user, style:  TextStyle(color: Colors.white)),
+          subtitle: Text(c.comment, style:  TextStyle(color: Colors.white70)),
         );
       },
     );
   }
 
-  // -----------------------------
-  // COMMENT INPUT BOX
-  // -----------------------------
+
   Widget buildCommentInputBox() {
     return Padding(
       padding: const EdgeInsets.all(16),

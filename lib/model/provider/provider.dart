@@ -99,15 +99,16 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //comments
-   Future<List<CommentModel>> showComments(int postId) async {
+  Future<List<CommentModel>> showComments(int postId) async {
     final res = await _apiService.showComments(postId);
 
     if (res != null) {
-      final list = res["data"]["comments"];
-      return list.map((e) => CommentModel.fromJson(e)).toList();
+      final list = res["data"]["comments"] as List<dynamic>; // explicitly cast
+      return list.map<CommentModel>((e) => CommentModel.fromJson(e)).toList();
     }
     return [];
   }
+
 
   // addComment
   Future<bool> addComment(int postId, String content) async {
@@ -115,8 +116,13 @@ class AuthProvider extends ChangeNotifier {
 
     final res = await _apiService.addComment(_token!, postId, content);
 
-    return (res != null && res["success"] == true);
+    if (res == null) return false;
+
+    return res["success"] == true ||
+        res["status"] == true ||
+        res["success"] == 1;
   }
+
 
   //like
   Future<Map<String, dynamic>> fetchLikes(int postId) async {

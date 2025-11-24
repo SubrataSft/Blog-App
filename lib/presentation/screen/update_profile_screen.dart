@@ -54,7 +54,7 @@ class _UpDateProfileScreenState extends State<UpDateProfileScreen> {
           children: [
             SizedBox(height: 40),
 
-            CircleAvatar(radius: 60, backgroundImage: AssetImage("")),
+            CircleAvatar(radius: 60, backgroundImage: AssetImage("assets/images/Normal_Image.png")),
             SizedBox(height: 40),
             CustomTextField(
               controller: nameController,

@@ -3,19 +3,20 @@ import '../../services/api.dart';
 import '../comments_model.dart';
 import '../model.dart';
 
-
 class AuthProvider extends ChangeNotifier {
   final _apiService = AuthApiService();
 
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
   String? _token;
+
   String? get token => _token;
 
   Map<String, dynamic>? _userData;
-  Map<String, dynamic>? get data => _userData;
 
+  Map<String, dynamic>? get data => _userData;
 
   void setToken(String token) {
     _token = token;
@@ -33,7 +34,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     if (response != null) {
-      _token = response["token"] ??
+      _token =
+          response["token"] ??
           response["data"]?["token"] ??
           response["barer_token"];
       return true;
@@ -42,7 +44,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // SignUp
-  Future<bool> signUp(String name, String email, String password, String phone) async {
+  Future<bool> signUp(
+    String name,
+    String email,
+    String password,
+    String phone,
+  ) async {
     _isLoading = true;
     notifyListeners();
 
@@ -76,10 +83,15 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //update profile
-  Future<bool> updateProfile(String name, String email,String phone) async {
+  Future<bool> updateProfile(String name, String email, String phone) async {
     if (_token == null) return false;
 
-    final response = await _apiService.updateProfile(_token!, name, email, phone);
+    final response = await _apiService.updateProfile(
+      _token!,
+      name,
+      email,
+      phone,
+    );
 
     if (response != null && response["success"] == true) {
       await showProfile();
@@ -109,7 +121,6 @@ class AuthProvider extends ChangeNotifier {
     return [];
   }
 
-
   // addComment
   Future<bool> addComment(int postId, String content) async {
     if (_token == null) return false;
@@ -122,7 +133,6 @@ class AuthProvider extends ChangeNotifier {
         res["status"] == true ||
         res["success"] == 1;
   }
-
 
   //like
   Future<Map<String, dynamic>> fetchLikes(int postId) async {
@@ -144,13 +154,14 @@ class AuthProvider extends ChangeNotifier {
 
   //changePassword
   Future<Map<String, dynamic>> changePassword(
-      String oldPass, String newPass) async {
+    String oldPass,
+    String newPass,
+  ) async {
     if (_token == null) return {"success": false};
 
     return await _apiService.changePassword(_token!, oldPass, newPass) ??
         {"success": false};
   }
-
 
   Future<bool> logout() async {
     if (_token == null) return false;

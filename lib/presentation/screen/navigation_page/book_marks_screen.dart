@@ -41,10 +41,10 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121217),
+      backgroundColor:Colors.black,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: const Color(0xFF121217),
+        backgroundColor: Colors.black,
         title: Text(
           "Books",
           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -61,8 +61,8 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                     onChanged: searchPosts,
                     decoration: InputDecoration(
                       hintText: "Search...",
-                      hintStyle: TextStyle(color: Colors.white70),
-                      fillColor: Colors.white70,
+                      hintStyle: TextStyle(color: Colors.black),
+                      fillColor: Colors.white,
                       filled: true,
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
@@ -116,3 +116,5 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
     );
   }
 }
+
+

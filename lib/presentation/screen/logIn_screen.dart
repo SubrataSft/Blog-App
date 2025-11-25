@@ -57,6 +57,8 @@ class _LogInScreenState extends State<LogInScreen> {
              CustomTextField(controller: _emailTEController, hintText: "email"),
               SizedBox(height: 16),
               CustomTextField(controller: _passwordTEController, hintText: "password",
+               obscureText: _obscurePassword,
+
                 suffixWidget: IconButton(
                   icon: Icon(
                     _obscurePassword

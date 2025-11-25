@@ -17,7 +17,7 @@ class _BlogScreenState extends State<BlogScreen> {
   @override
   void initState() {
     super.initState();
-    futurePosts = fetchPosts();
+    futurePosts = fetchPosts(perPage: 1000);
   }
 
   @override
@@ -137,9 +137,9 @@ class _BlogScreenState extends State<BlogScreen> {
 // API URL
 String baseUrl = "https://api.zhndev.site/wp-json/blog-app/v1/posts";
 
-Future<List<Posts>> fetchPosts() async {
+Future<List<Posts>> fetchPosts({int page = 1, int perPage = 1000}) async {
   try {
-    final response = await http.get(Uri.parse(baseUrl));
+    final response = await http.get(Uri.parse("$baseUrl?page=$page&per_page=$perPage"));
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
